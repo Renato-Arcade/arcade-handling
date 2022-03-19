@@ -35,7 +35,7 @@ local handling = {
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- HANDLINGEVENT
 -----------------------------------------------------------------------------------------------------------------------------------------
-AddEventHandler("gameEventTriggered", function (name, args)
+local activeHandling = function (name, args)
     if name == "CEventNetworkPlayerEnteredVehicle" then
         print("Script de handling desenvolvido por Arcade Shop: https://discord.gg/k52z2kZPFX | Renato#0069")
         local ped = PlayerPedId()
@@ -68,11 +68,12 @@ AddEventHandler("gameEventTriggered", function (name, args)
             end
         end
     end
-end)
+end
+AddEventHandler("gameEventTriggered",activeHandling)
 -----------------------------------------------------------------------------------------------------------------------------------------
 -- HANDLINGPICKUP
 -----------------------------------------------------------------------------------------------------------------------------------------
-RegisterCommand("handling",function(source,args,rawCommand)
+local getHandling = function(source,args,rawCommand)
     local ped = PlayerPedId()
     local vehicle = GetVehiclePedIsIn(ped)
     local infos = ""
@@ -89,4 +90,5 @@ RegisterCommand("handling",function(source,args,rawCommand)
         end
         vRP.prompt("Handling do Veículo:",infos)
     end
-end)
+end
+RegisterCommand("handling",getHandling)
